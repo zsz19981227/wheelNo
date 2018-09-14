@@ -38,6 +38,7 @@
     .Picture_details{
         display: flex;
         flex-wrap: wrap;
+        overflow-y: scroll;
     }
     .Picture_details li{
         width: 32%;

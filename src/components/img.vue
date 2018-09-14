@@ -1,22 +1,24 @@
 <template>
-    <div class="img">
+    <div class="img_tab">
         <div class="tab_img" @click="e=>tabImg(e.target)">
             <span>全部颜色</span>
             <span>全部车款</span>
         </div>
         <div class="overflow_scroll">
-            <ul v-for="(val,ind) in list" :key="ind">
-                <li v-for="(value,index) in val.List" :key="index" :id="index" v-if="index === 0" @click="imgClick(val.Id)">
-                    <img :src="value.Url" />
-                    <div class="imgClick">
-                        <p>{{val.Name}}</p>
-                        <p>{{val.Count}}</p>
-                    </div>
-                </li>
-                <li v-for="(value,index) in val.List" :key="index" :id="index" v-if="index !== 0">
-                    <img :src="value.Url" />
-                </li>
-            </ul>
+            <div class="scroll_hidden">
+                <ul v-for="(val,ind) in list" :key="ind">
+                    <li v-for="(value,index) in val.List" :key="index" :id="index" v-if="index === 0" @click="imgClick(val.Id)">
+                        <img :src="value.Url" />
+                        <div class="imgClick">
+                            <p>{{val.Name}}</p>
+                            <p>{{val.Count}}</p>
+                        </div>
+                    </li>
+                    <li v-for="(value,index) in val.List" :key="index" v-if="index !== 0">
+                        <img :src="value.Url" />
+                    </li>
+                </ul>
+            </div>
         </div>
         <ColorMask :class="showMask ? 'active' : ''"></ColorMask>
     </div>
@@ -28,7 +30,7 @@
         computed: {
             ...mapState({
                 list: state => state.img.list,
-                showMask : state => state.img.showMask
+                showMask: state => state.img.showMask
             })
         },
         methods: {
@@ -36,7 +38,7 @@
                 imgList: 'img/imgList'
             }),
             ...mapMutations({
-                tabImg : 'img/tabImg'
+                tabImg: 'img/tabImg'
             }),
             imgClick(id) {
                 this.$router.push({
@@ -48,8 +50,8 @@
                 })
             }
         },
-        components : {
-            ColorMask : ColorMask
+        components: {
+            ColorMask: ColorMask
         },
         mounted() {
             this.imgList(this.$route.query.id)
@@ -62,33 +64,37 @@
         padding: 0;
         box-sizing: border-box;
         font-size: .14rem;
-      }
-    
-      html,
-      body,
-      #app {
+    }
+
+    html,
+    body,
+    #app {
         width: 100%;
         height: 100%;
-      }
-    
-      html {
+    }
+
+    html {
         font-size: 625%;
-      }
-    
-      a {
+    }
+
+    a {
         color: #000;
         text-decoration: none;
-      }
+    }
+
     li {
         list-style: none;
     }
+
     .overflow_scroll {
-        height: 100%;
+        flex: 1;
+        margin-top: .33rem;
         overflow-y: scroll;
-        margin-top: .1rem;
-        margin-top: .5rem;
     }
-    .tab_img{
+    .scroll_hidden{
+        overflow-y: scroll;
+    }
+    .tab_img {
         width: 100%;
         height: .4rem;
         display: flex;
@@ -98,37 +104,47 @@
         left: 0;
         background-color: #fff;
         z-index: 10;
+        border-bottom: 1px solid #ccc;
     }
-    .tab_img span{
+
+    .img_tab {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .tab_img span {
         width: 50%;
         text-align: center;
         line-height: .4rem;
     }
-    .img ul {
+
+    .img_tab ul {
         display: flex;
         flex-wrap: wrap;
         margin-top: .1rem;
     }
 
-    .img ul li {
-        width: 33%;
-        /* height: 6rem; */
+    .img_tab ul li {
+        width: 32%;
         overflow: hidden;
         text-align: center;
         overflow: hidden;
+        margin-left: 1.3%;
     }
 
-    .img ul li img {
-        width: 98%;
+    .img_tab ul li img {
+        width: 95%;
     }
 
-    .img ul li:first-child {
+    .img_tab ul li:first-child {
         position: relative;
+        height: 100%;
     }
 
     .imgClick {
         width: 100%;
-        height: 5.6rem;
+        height: 100%;
         position: absolute;
         background: rgba(56, 90, 130, .5);
         text-align: center;
