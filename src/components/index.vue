@@ -34,8 +34,8 @@
       return {
         city: null,
         height: 0,
-        title : [],
-        letter : []
+        // title : [],
+        // letter : []
       }
     },
     components: {
@@ -49,7 +49,9 @@
         list: state => state.app.list,
         letters: state => state.app.letters,
         isShow: state => state.app.isShow,
-        car : state => state.app.car
+        car : state => state.app.car,
+        title : state => state.app.title,
+        letter : state => state.app.letter
       })
 
     },
@@ -101,9 +103,9 @@
     },
     mounted() {
       this.listCar()
-      setTimeout(() => {
-        this.intercept()
-      }, 500);
+      // setTimeout(() => {
+      //   this.intercept()
+      // }, 500);
     },
     updated() {
       this.height = 0.37 * window.innerWidth / 750 * 100;

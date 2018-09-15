@@ -7,7 +7,9 @@ let state = {
   isShow: false,
   brandId: "",
   makeList: "",
-  isShowList : false
+  isShowList : false,
+  title : [],
+  letter : []
 };
 
 let getters = {};
@@ -33,6 +35,13 @@ let mutations = {
   },
   carList : (state,payload)=>{
     state.car = payload
+    payload.map((item, ind) => {
+      let spli = item.Spelling.slice(0, 1)
+        if (state.title.indexOf(spli) === -1) {
+          state.title.push(spli)
+        }
+      })
+      state.letter = state.title.slice();
   }
 };
 let actions = {
